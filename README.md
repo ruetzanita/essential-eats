@@ -32,6 +32,7 @@ To prevent excessive API billing or database conflicts while allowing full inter
 - Uses `localStorage` to give every user an isolated, pristine database session.
 - Implements **IP Rate Limiting** (configurable, typically 5 requests/day) backed by Cloudflare D1.
 - Implements **Prompt Caching** to instantly return AI responses for frequently tested inventory combinations.
+- Use test_reciept if you don't have a grocery receipt lying around to scan and upload.
 
 ## Running Locally
 
