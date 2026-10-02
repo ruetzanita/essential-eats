@@ -9,11 +9,11 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.16.5",
-    "vitest": "~3.2.0",
-    "wrangler": "^4.81.1"
+    "@cloudflare/vitest-pool-workers": "^0.16.20",
+    "vitest": "~3.2.6",
+    "wrangler": "^4.105.0"
   },
   "dependencies": {
-    "hono": "^4.12.18"
+    "hono": "^4.13.7"
   }
 }
