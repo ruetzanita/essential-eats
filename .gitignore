@@ -46,3 +46,10 @@ desktop.ini
 coverage/
 .nyc_output/
 *.lcov
+
+#Developer Files
+/dev/
+/dev
+/local
+/local/
+

@@ -6,8 +6,12 @@ import {
 import { 
     switchView, toggleGrocery, addShopItem, removeShopItem, exportShoppingList,
     updateStagingData, removeFromStaging, scrollToOutOfStock, scrollToTop, renderShop, showToast,
-    openSplashIntro, dismissSplashIntro, dismissSplashIntroAndSupper, handleSplashBackdropClick
+    openSplashIntro, dismissSplashIntro, dismissSplashIntroAndSupper, handleSplashBackdropClick,
+    initTheme, setTheme, toggleThemePicker, closeThemePicker
 } from './ui.js';
+
+// Initialize sensory theme immediately to prevent any flash of unstyled theme
+initTheme();
 
 // Attach UI functions to window for HTML event handlers
 window.switchView = switchView;
@@ -24,6 +28,9 @@ window.openSplashIntro = openSplashIntro;
 window.dismissSplashIntro = dismissSplashIntro;
 window.dismissSplashIntroAndSupper = dismissSplashIntroAndSupper;
 window.handleSplashBackdropClick = handleSplashBackdropClick;
+window.setTheme = setTheme;
+window.toggleThemePicker = toggleThemePicker;
+window.closeThemePicker = closeThemePicker;
 
 // Attach API functions to window
 window.updateQty = updateQty;
@@ -43,20 +50,29 @@ window.saveClippedRecipe = saveClippedRecipe;
 window.addEventListener('scroll', () => {
     const btn = document.getElementById('back-to-top');
     if (!btn) return;
-    if (window.scrollY > 300) {
+    if (window.scrollY > 200) {
         btn.classList.add('visible');
     } else {
         btn.classList.remove('visible');
     }
 });
 
-// Escape key listener for splash overlay
+// Escape key listener for splash overlay and theme picker
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         const overlay = document.getElementById('splash-intro-overlay');
         if (overlay && overlay.classList.contains('splash-active')) {
             dismissSplashIntro();
         }
+        closeThemePicker();
+    }
+});
+
+// Click outside listener for theme picker dropdown
+window.addEventListener('click', (e) => {
+    const container = document.querySelector('.theme-picker-container');
+    if (container && !container.contains(e.target)) {
+        closeThemePicker();
     }
 });
 

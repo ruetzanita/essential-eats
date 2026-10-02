@@ -123,6 +123,68 @@
             <button class="btn btn-outline btn-story" onclick="openSplashIntro()" title="Intro & Demo Story">
                 <i class="ph ph-sparkle"></i> STORY
             </button>
+            <div class="theme-picker-container">
+                <button id="btn-theme-picker" class="btn btn-outline btn-theme" onclick="toggleThemePicker(event)" title="Choose Sensory Color Theme" aria-label="Color Themes">
+                    <i class="ph ph-palette"></i> THEME
+                </button>
+                <div id="theme-picker-dropdown" class="theme-picker-dropdown" style="display: none;" role="dialog" aria-label="Theme selector">
+                    <div class="theme-picker-header">
+                        <span class="theme-picker-title"><i class="ph ph-palette"></i> Sensory Color Themes</span>
+                        <span class="theme-picker-sub">Select a palette that feels calm for you</span>
+                    </div>
+                    <div class="theme-options-list">
+                        <!-- 1. Midnight Neon -->
+                        <button class="theme-option-btn" onclick="setTheme('midnight')" data-theme-id="midnight">
+                            <div class="theme-swatch" style="background: linear-gradient(135deg, #0D0E12 50%, #FF6B6B 50%); border: 1px solid rgba(255,107,107,0.4);"></div>
+                            <div class="theme-info">
+                                <span class="theme-name">Midnight Neon <span class="theme-badge-default">Default</span></span>
+                                <span class="theme-desc">Deep dark slate with sunset coral</span>
+                            </div>
+                            <i class="ph ph-check-bold theme-check"></i>
+                        </button>
+
+                        <!-- 2. Warm Earth & Sage -->
+                        <button class="theme-option-btn" onclick="setTheme('sage')" data-theme-id="sage">
+                            <div class="theme-swatch" style="background: linear-gradient(135deg, #191C18 50%, #7EA172 50%); border: 1px solid rgba(126,161,114,0.5);"></div>
+                            <div class="theme-info">
+                                <span class="theme-name">Warm Earth & Sage</span>
+                                <span class="theme-desc">Low stimulation, soft olive & calming sage</span>
+                            </div>
+                            <i class="ph ph-check-bold theme-check"></i>
+                        </button>
+
+                        <!-- 3. Lavender Dusk -->
+                        <button class="theme-option-btn" onclick="setTheme('dusk')" data-theme-id="dusk">
+                            <div class="theme-swatch" style="background: linear-gradient(135deg, #12131D 50%, #9E86E8 50%); border: 1px solid rgba(158,134,232,0.5);"></div>
+                            <div class="theme-info">
+                                <span class="theme-name">Lavender Dusk</span>
+                                <span class="theme-desc">Restful evening twilight & gentle lilac</span>
+                            </div>
+                            <i class="ph ph-check-bold theme-check"></i>
+                        </button>
+
+                        <!-- 4. Linen & Matcha -->
+                        <button class="theme-option-btn" onclick="setTheme('linen')" data-theme-id="linen">
+                            <div class="theme-swatch" style="background: linear-gradient(135deg, #F2F4F0 50%, #3E7E52 50%); border: 1px solid rgba(62,126,82,0.4);"></div>
+                            <div class="theme-info">
+                                <span class="theme-name">Linen & Matcha</span>
+                                <span class="theme-desc">Airy morning light, soft linen & fresh matcha</span>
+                            </div>
+                            <i class="ph ph-check-bold theme-check"></i>
+                        </button>
+
+                        <!-- 5. Paper & Oat -->
+                        <button class="theme-option-btn" onclick="setTheme('oat')" data-theme-id="oat">
+                            <div class="theme-swatch" style="background: linear-gradient(135deg, #F5F4EE 50%, #C75932 50%); border: 1px solid rgba(199,89,50,0.5);"></div>
+                            <div class="theme-info">
+                                <span class="theme-name">Paper & Oat</span>
+                                <span class="theme-desc">Gentle warm light mode, easy on daylight eyes</span>
+                            </div>
+                            <i class="ph ph-check-bold theme-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <button class="btn btn-outline" onclick="toggleGrocery()"><i class="ph ph-receipt"></i> + GROCERY</button>
         </div>
     </header>
@@ -152,12 +214,12 @@
 
         <textarea id="raw-input"
             placeholder="Paste digital receipt, checkout summary, or grocery list here... you can even just type it out if you really want!"></textarea>
-        <button class="btn" style="width:100%; background:var(--accent-grad); margin: 10px 0; color:#000;"
+        <button class="btn" style="width:100%; background:var(--accent-grad); margin: 10px 0; color:#FFFFFF; font-weight:700;"
             onclick="parseGrocery()"><i class="ph ph-sparkle"></i> PROCESS WITH GEMINI 3.8 FLASH</button>
 
         <div id="staging-area"></div>
         <button id="commit-btn" class="btn"
-            style="display:none; width:100%; background:var(--success); color:#000; margin-top:15px;"
+            style="display:none; width:100%; background:var(--success); color:#FFFFFF; font-weight:700; margin-top:15px;"
             onclick="commitGrocery()"><i class="ph ph-check-circle"></i> COMMIT TO INVENTORY</button>
     </div>
 
@@ -181,7 +243,7 @@
     <div id="view-shop" class="view">
         <div style="padding: 15px; display: flex; gap: 10px;">
             <input type="text" id="shop-input" placeholder="Add custom grocery item..." style="flex:1;">
-            <button class="btn btn-qty" style="background:var(--accent-grad); border:none; color:#000;"
+            <button class="btn btn-qty" style="background:var(--accent-grad); border:none; color:#FFFFFF;"
                 onclick="addShopItem()" title="Add Item"><i class="ph ph-plus"></i></button>
         </div>
 
@@ -221,11 +283,11 @@
             <div style="display:flex; gap:8px; margin-bottom:10px;">
                 <input type="url" id="recipe-url-input" placeholder="https://allrecipes.com/recipe/..." style="flex:1;">
             </div>
-            <button id="btn-parse-url" class="btn" style="width:100%; background:var(--accent-grad); color:#000; font-weight:600;"
+            <button id="btn-parse-url" class="btn" style="width:100%; background:var(--accent-grad); color:#FFFFFF; font-weight:700;"
                 onclick="importRecipeFromUrl()"><i class="ph ph-download-simple"></i> FETCH & SAVE (NO ADS)</button>
             
-            <div style="margin-top:12px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:8px; font-size:0.75rem; color:var(--text-muted); line-height:1.4;">
-                <b style="color:var(--text-main);"><i class="ph ph-device-mobile"></i> Mobile Browser Tip:</b> Bookmark this link on your phone: <a href="javascript:(function(){window.open('https://essentialeats.ruetzanita.com/?clip='+encodeURIComponent(location.href));})();" onclick="event.preventDefault(); navigator.clipboard.writeText(this.href); showToast('Mobile bookmarklet copied to clipboard!', 'info');" style="color:var(--text-accent); text-decoration:underline; font-weight:600;">Clip to Essential Eats</a> (tap to copy bookmarklet).
+            <div style="margin-top:12px; padding:10px; background:var(--btn-qty-bg); border:1px solid var(--border); border-radius:8px; font-size:0.75rem; color:var(--text-muted); line-height:1.4;">
+                <b style="color:var(--text);"><i class="ph ph-device-mobile"></i> Mobile Browser Tip:</b> Bookmark this link on your phone: <a href="javascript:(function(){window.open('https://essentialeats.ruetzanita.com/?clip='+encodeURIComponent(location.href));})();" onclick="event.preventDefault(); navigator.clipboard.writeText(this.href); showToast('Mobile bookmarklet copied to clipboard!', 'info');" style="color:var(--text-accent); text-decoration:underline; font-weight:600;">Clip to Essential Eats</a> (tap to copy bookmarklet).
             </div>
         </div>
 
@@ -238,7 +300,7 @@
             </div>
             <textarea id="recipe-import-input" style="height:140px;"
                 placeholder="Paste raw unstructured recipe text from blogs, emails, or notes..."></textarea>
-            <button class="btn" style="width:100%; margin-top:10px; background:var(--accent-grad); color:#000; font-weight:600;"
+            <button class="btn" style="width:100%; margin-top:10px; background:var(--accent-grad); color:#FFFFFF; font-weight:700;"
                 onclick="importRecipes()"><i class="ph ph-file-arrow-down"></i> PARSE & SAVE RECIPES</button>
         </div>
 
@@ -249,13 +311,16 @@
     <!-- Floating Bottom Dock -->
     <div class="bottom-dock">
         <div id="quick-nav" class="quick-nav"></div>
-        <div style="display:flex; gap:10px; align-items:center;">
+        <div class="bottom-dock-actions">
             <div id="dock-out-badge" class="dock-warning-badge" style="display:none;" onclick="scrollToOutOfStock()"
                 title="Jump to Out of Stock">
                 <i class="ph ph-warning-circle"></i> <span id="out-count-num">0</span> OUT
             </div>
-            <button id="supper-btn" onclick="getSuggestions()" style="flex:1;">
+            <button id="supper-btn" onclick="getSuggestions()">
                 <i class="ph ph-magic-wand"></i> WHAT'S FOR SUPPER?
+            </button>
+            <button id="back-to-top" onclick="scrollToTop()" title="Back to Top">
+                <i class="ph ph-arrow-up"></i>
             </button>
         </div>
     </div>
@@ -264,10 +329,6 @@
     <div id="toast-container" class="toast-container"></div>
 
     <script type="module" src="/src/main.js"></script>
-
-    <button id="back-to-top" onclick="scrollToTop()" title="Back to Top">
-        <i class="ph ph-arrow-up"></i>
-    </button>
 </body>
 
 </html>

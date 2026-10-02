@@ -93,6 +93,16 @@ graph TD
 - **Seamless Local Shard Sync:** Clipped recipes sync directly into `kh_sandbox_recipes` in the Essential Eats dashboard with live glassmorphic toasts.
 - **Mobile Browser URL Portal & 1-Tap Bookmarklet:** Solves mobile browser limitations by providing an in-app "CLIP RECIPE FROM URL" modal and 1-tap bookmarklet (`javascript:...`) for iOS Safari and Android Chrome.
 
+### 9. Sensory-Friendly Color Theme Engine (5 Palettes)
+- **Neurodivergent & Sensory Accessibility:** Designed for users with sensory overload, ADHD, Autism, migraines, or eye fatigue who find dark-mode with neon/vibrant accents overwhelming.
+- **5 Standard Sensory Palettes (3 Dark, 2 Light):**
+  - 🌑 **Midnight Neon (Dark / Default):** Deep dark slate (`#0D0E12`) with vibrant sunset coral accents (`#FF6B6B`).
+  - 🌿 **Warm Earth & Sage (Dark):** Muted olive stone (`#191C18`) with soft calming sage green (`#7EA172`), engineered for low stimulation and zero glare.
+  - 🪻 **Lavender Dusk (Dark):** Twilight indigo slate (`#12131D`) with gentle, restful lilac (`#9E86E8`) for late-night kitchen sessions.
+  - 🍵 **Linen & Matcha (Soft Light):** Soft unbleached linen (`#F2F4F0`) with pure white cards, forest slate text (`#19271E`), and fresh organic matcha green (`#3E7E52`).
+  - 📜 **Paper & Oat (Warm Light):** Gentle warm oat milk (`#F5F4EE`) with pure white cards, high-clarity slate text (`#1E293B`), and terracotta accents (`#C75932`) for daylight reading and astigmatism comfort.
+- **1-Tap Header Picker:** Instant switching via the `THEME` button with persistent `localStorage` saving, zero-flash startup initialization, and non-blocking toast notifications.
+
 ---
 
 ## The Sandbox Firewall Architecture
@@ -139,6 +149,7 @@ npm run build       # Validates production build in interface/dist
 
 ## Technical Whitepapers & Architecture Reports
 
+- ❤️ [Product Philosophy & The North Star](./PHILOSOPHY.md)
 - 📄 [Case Study: Serverless AI Data Ingestion](./Case_Study_Serverless_AI_Data_Ingestion.md) (also available as [PDF](./Case_Study_Serverless_AI_Data_Ingestion.pdf))
 - 🛡️ [Security Whitepaper: LLM Guardrails & Infrastructure Hardening](./Security_Whitepaper_LLM_Guardrails.md) (also available as [PDF](./Security_Whitepaper_LLM_Guardrails.pdf))
 - 📊 [Executive Architecture Summary](./EXECUTIVE_SUMMARY.md)

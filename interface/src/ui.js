@@ -118,7 +118,7 @@ export function renderInv(data) {
                 <div class="card" style="border-left: 4px solid ${catData.color};">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                         <span style="font-weight:600; font-size:1.05rem;">${item.name || 'Unknown'}</span>
-                        <span style="color:#D4AF37; font-weight:600;">Qty: ${item.quantity || 0} ${item.unit && item.unit !== 'count' ? `<small style="color:#888;">${item.unit}</small>` : ''}</span>
+                        <span style="color:#D4AF37; font-weight:600;">Qty: ${item.quantity || 0} ${item.unit && item.unit !== 'count' ? `<small style="color:var(--text-muted);">${item.unit}</small>` : ''}</span>
                     </div>
                     <div class="controls">
                         <button class="btn-icon" style="color:var(--accent); margin-right: 12px;" onclick="window.addShopItem('${(item.name || "").replace(/'/g, "\\'")}')" title="Add to Shopping List"><i class="ph ph-shopping-cart-simple" style="font-size: 1.2rem;"></i></button>
@@ -140,7 +140,7 @@ export function renderInv(data) {
         outOfStock.forEach(item => {
             const catData = getCategoryData(item.category || 'Pantry');
             list.innerHTML += `
-                <div class="card card-out-of-stock" style="border-left: 4px solid #EF4444;">
+                <div class="card card-out-of-stock" style="border-left: 4px solid var(--danger);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                         <div style="display:flex; align-items:center; gap:8px;">
                             <span style="font-weight:600; font-size:1.05rem; opacity:0.85;">${item.name || 'Unknown'}</span>
@@ -148,7 +148,7 @@ export function renderInv(data) {
                                 <i class="ph ${catData.icon}"></i> ${item.category || 'Pantry'}
                             </span>
                         </div>
-                        <span style="color:#EF4444; font-weight:700; font-size:0.85rem; letter-spacing:0.5px;">OUT</span>
+                        <span style="color:var(--danger); font-weight:700; font-size:0.85rem; letter-spacing:0.5px;">OUT</span>
                     </div>
                     <div class="controls">
                         <button class="btn-icon" style="color:var(--accent); margin-right: 12px;" onclick="window.addShopItem('${(item.name || "").replace(/'/g, "\\'")}')" title="Add to Shopping List"><i class="ph ph-shopping-cart-simple" style="font-size: 1.2rem;"></i></button>
@@ -185,7 +185,7 @@ export function renderStaging() {
         const unit = item.unit || "count";
 
         area.innerHTML += `
-            <div class="card" style="background:#202228; margin:10px 0; border: 1px solid var(--border);">
+            <div class="card" style="margin:10px 0; border: 1px solid var(--border);">
                 <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:10px;">
                     <input type="text" value="${name}" onchange="window.updateStagingData(${index}, 'name', this.value)" placeholder="Item name">
                     <div style="display:grid; grid-template-columns: 80px 1fr; gap:10px; width: 100%;">
@@ -267,7 +267,7 @@ export function renderSuggestions() {
             <div class="card">
                 <div onclick="document.getElementById('${id}').classList.toggle('active')" style="cursor:pointer;">
                     <b style="color:var(--text-accent); font-size:1.15rem;">${title}</b><br>
-                    <small style="color:#aaa;">${note}</small>
+                    <small style="color:var(--text-muted);">${note}</small>
                 </div>
                 <div id="${id}" class="recipe-content">
                     ${metaHtml}
@@ -276,7 +276,7 @@ export function renderSuggestions() {
                     <ul>${ings.map(ing => `<li>${ing || ''}</li>`).join('')}</ul>
                     <p style="margin-top:15px; font-weight:600;"><i class="ph ph-cooking-pot"></i> Chef Instructions:</p>
                     <ol>${inst.map(step => `<li style="margin-bottom:8px;">${step || ''}</li>`).join('')}</ol>
-                    <button class="btn" style="background:var(--success); color:#000; width:100%; margin-top:15px;" onclick="window.saveRecipe(${i})"><i class="ph ph-heart"></i> SAVE TO FAVORITES</button>
+                    <button class="btn" style="background:var(--success); color:#FFFFFF; font-weight:700; width:100%; margin-top:15px;" onclick="window.saveRecipe(${i})"><i class="ph ph-heart"></i> SAVE TO FAVORITES</button>
                 </div>
             </div>`;
     });
@@ -308,8 +308,8 @@ export function renderLibrary(data) {
                     <div style="flex:1;">
                         <b style="color:var(--text-accent); font-size:1.1rem; line-height:1.3;">${r.title || 'Unnamed'}</b><br>
                         <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:4px;">
-                            <small style="color:#888;">${r.scalingNote || 'Favorites'}</small>
-                            ${(r.prepTime || r.cookTime) ? `<span style="font-size:0.75rem; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:6px;"><i class="ph ph-clock"></i> ${[r.prepTime, r.cookTime].filter(Boolean).join(' + ')}</span>` : ''}
+                            <small style="color:var(--text-muted);">${r.scalingNote || 'Favorites'}</small>
+                            ${(r.prepTime || r.cookTime) ? `<span style="font-size:0.75rem; color:var(--text-muted); background:var(--btn-qty-bg); padding:2px 6px; border-radius:6px;"><i class="ph ph-clock"></i> ${[r.prepTime, r.cookTime].filter(Boolean).join(' + ')}</span>` : ''}
                             ${sourceDomain ? `<a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" style="font-size:0.75rem; color:#60a5fa; text-decoration:none; display:inline-flex; align-items:center; gap:3px;"><i class="ph ph-arrow-square-out"></i> ${sourceDomain}</a>` : ''}
                         </div>
                     </div>
@@ -507,4 +507,58 @@ window.flyToCategory = function(safeId) {
         }
     }, 50);
 };
+
+// --- Sensory Theme Engine (5 Color Schemes) ---
+export function initTheme() {
+    const savedTheme = localStorage.getItem('ee_theme') || 'midnight';
+    applyTheme(savedTheme, false);
+}
+
+export function setTheme(themeName) {
+    applyTheme(themeName, true);
+    closeThemePicker();
+}
+
+function applyTheme(themeName, notify = true) {
+    const validThemes = ['midnight', 'sage', 'dusk', 'linen', 'oat'];
+    const normalizedTheme = themeName === 'amber' ? 'linen' : themeName;
+    const activeTheme = validThemes.includes(normalizedTheme) ? normalizedTheme : 'midnight';
+    
+    document.documentElement.setAttribute('data-theme', activeTheme);
+    localStorage.setItem('ee_theme', activeTheme);
+    
+    // Update theme picker active states
+    document.querySelectorAll('.theme-option-btn').forEach(btn => {
+        if (btn.dataset.themeId === activeTheme) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    const themeNames = {
+        'midnight': 'Midnight Neon',
+        'sage': 'Warm Earth & Sage',
+        'dusk': 'Lavender Dusk',
+        'linen': 'Linen & Matcha',
+        'oat': 'Paper & Oat'
+    };
+    
+    if (notify) {
+        showToast(`Theme changed to ${themeNames[activeTheme]}`, 'info', 2500);
+    }
+}
+
+export function toggleThemePicker(e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const dropdown = document.getElementById('theme-picker-dropdown');
+    if (!dropdown) return;
+    const isShown = dropdown.style.display !== 'none';
+    dropdown.style.display = isShown ? 'none' : 'flex';
+}
+
+export function closeThemePicker() {
+    const dropdown = document.getElementById('theme-picker-dropdown');
+    if (dropdown) dropdown.style.display = 'none';
+}
 
