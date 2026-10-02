@@ -36,9 +36,9 @@ The backend is built entirely on edge infrastructure to ensure global low latenc
     *   **Output:** Returns a rigidly structured JSON array ready for deterministic database insertion.
 
 *   **`POST /api/suggest`**
-    *   **Function:** The "Michelin-Trained Chef" constraint solver.
-    *   **Logic:** Dynamically queries the user's current inventory snapshot. It actively seeks protein/fresh anchors (`Fresh`, `Frozen Foods`, `Meat`), injects **5 mandatory baseline dietary guardrails** (Gluten-Free, Dairy-Free, Chocolate-Free, Sage-Free, Nut-Free) combined with active UI toggles, and generates recipes.
-    *   **Output:** Returns exactly 5 recipes in a rigid JSON format, detailing prep times, cooking temperatures, seasoning profiles, and custom `chefTip` culinary guidance.
+    *   **Function:** The "Nourishing Supper" constraint solver.
+    *   **Logic:** Dynamically queries the user's current inventory snapshot. It actively seeks protein/fresh anchors (`Fresh`, `Frozen Foods`, `Meat`), injects strict dietary guardrails (Gluten-Free, Dairy-Free, Nut-Free, Vegetarian, Vegan, Keto) combined with active UI toggles, and generates recipes.
+    *   **Output:** Returns exactly 5 recipes in a rigid JSON format, detailing prep times, cooking temperatures, seasoning profiles, and concise, inspiring `chefTip` (Nourish Note) culinary guidance.
 
 ### Architecture Flowchart
 

@@ -24,7 +24,7 @@ const API_METADATA = {
     { path: "/", method: "GET", description: "Health check & service metadata" },
     { path: "/api", method: "GET", description: "Health check & service metadata" },
     { path: "/api/grocery/parse", method: "POST", description: "AI receipt ingestion (text or image) with context matching" },
-    { path: "/api/suggest", method: "POST", description: "Michelin chef 5-recipe generator with strict dietary guardrails" },
+    { path: "/api/suggest", method: "POST", description: "Nourishing supper 5-recipe generator with strict dietary guardrails" },
     { path: "/api/recipes/import", method: "POST", description: "Bulk unstructured recipe text parsing" },
     { path: "/api/recipes/parse-url", method: "POST", description: "Clean URL recipe extraction via Schema.org JSON-LD and Gemini 3.8 Flash" }
   ]
@@ -208,7 +208,7 @@ ${existingItemsContext}`;
   return new Response(cleanText, { headers: { 'Content-Type': 'application/json' } });
 });
 
-// --- /api/suggest (Michelin Chef Engine with selectable dietary guardrails) ---
+// --- /api/suggest (Nourishing Supper Engine with selectable dietary guardrails) ---
 app.post('/api/suggest', async (c) => {
   const isAllowed = await checkRateLimit(c);
   if (!isAllowed) return c.json({ error: "Sandbox rate limit exceeded (5 requests/day). Please try again tomorrow." }, 429);
@@ -252,8 +252,10 @@ app.post('/api/suggest', async (c) => {
   const freshItems = safeInventory.filter(i => (i.quantity || 0) > 0 && ['Fresh', 'Produce'].includes(i.category)).map(i => i.name).join(", ");
   const pantryItems = safeInventory.filter(i => (i.quantity || 0) > 0 && !['Fresh', 'Produce', 'Meat'].includes(i.category)).map(i => i.name).join(", ");
 
-  const systemInstructionText = `You are an elite Michelin-trained executive chef AI.
-You create culinary masterpieces tailored to home kitchens using currently available pantry items.
+  const systemInstructionText = `You are an encouraging, culinary-wise AI and trusted kitchen companion.
+Your mission is two-fold (The Balance of the Scale):
+1. THE PRACTICAL ANCHOR: Ground each recipe strictly in the user's available pantry and fresh ingredients, respecting dietary safety without requiring unnecessary or missing items. Keep recipes accessible (around 3-6 ingredients typical for home meals).
+2. THE NOURISH NOTE: Make every meal feel intentional, comforting, and special—never like an afterthought or rushed chore.
 
 You MUST output an array of EXACTLY 5 complete JSON recipe objects.
 
@@ -261,24 +263,24 @@ JSON OBJECT SPECIFICATION:
 {
   "title": string,
   "prepTime": string (e.g. "15 mins"),
-  "cookTime": string (e.g. "25 mins"),
-  "cookingTemp": string (e.g. "375°F / Medium-High"),
-  "seasoningProfile": string (detailed description of herbs, spices, acid, umami),
-  "ingredients": array of strings (minimum 6-8 ingredients with measurements),
-  "instructions": array of strings (detailed, numbered culinary execution steps),
-  "scalingNote": string (e.g. "Serves 4 - scales easily"),
-  "chefTip": string (CRITICAL: seasonal ingredient substitutions, pan-sauce techniques, searing tips, or spice alternatives)
+  "cookTime": string (e.g. "20 mins"),
+  "cookingTemp": string (e.g. "375°F / Medium heat"),
+  "seasoningProfile": string (warm description of herbs, spices, or aromatics),
+  "ingredients": array of strings (prioritizing listed pantry items and basic staples; keep accessible and realistic),
+  "instructions": array of strings (clear, reassuring step-by-step culinary guidance),
+  "scalingNote": string (e.g. "Serves 4 - comforting family supper"),
+  "chefTip": string (CRITICAL: "Nourish Note". 2-3 sentences max. Short, sweet, and encouraging—no essays or flowery language. Highlight 1 ingredient or simple trick that makes this meal feel special tonight, plus 1 easy swap for next time, e.g. "Save this: chicken tonight, but pork or tofu works great next week!")
 }
 
-CRITICAL CHEF RULES:
-1. Feature ${mainProtein} prominently across recipes when applicable, highlighting creative preparation styles.
+CRITICAL RULES:
+1. Feature ${mainProtein} thoughtfully, honoring the ingredients available.
 ${combinedRestrictions.length > 0
   ? `2. DIETARY RESTRICTIONS (MANDATORY & ZERO-TOLERANCE FOR SELECTED GUARDRAILS):
 ${combinedRestrictions.map(r => `   - STRICT: ${r}`).join('\n')}
    Zero cross-contamination or suggestions of restricted ingredients.`
   : `2. DIETARY RESTRICTIONS:
-   Open dietary profile (no active dietary restrictions). Freely utilize available pantry staples while maintaining high culinary standards.`}
-3. Every single recipe MUST include a distinct, valuable "chefTip".`;
+   Open dietary profile (no active dietary restrictions). Freely utilize available pantry staples while maintaining comforting, wholesome standards.`}
+3. Every single recipe MUST include a distinct "chefTip" (Nourish Note): 2-3 sentences max, with 1 practical flavor/nourish touch and 1 adaptable swap for next time.`;
 
   const prompt = `CURRENT PANTRY STATE:
 - Primary Protein / Centerpiece: ${mainProtein}

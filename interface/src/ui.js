@@ -168,7 +168,8 @@ export function scrollToOutOfStock() {
     setTimeout(() => {
         const target = document.getElementById('cat-header-outofstock');
         if (target) {
-            const y = target.getBoundingClientRect().top + window.scrollY - 130;
+            const offset = window.innerWidth <= 640 ? 86 : 112;
+            const y = target.getBoundingClientRect().top + window.scrollY - offset;
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
     }, 60);
@@ -232,7 +233,7 @@ export function removeFromStaging(index) {
 
 export function renderSuggestions() {
     const div = document.getElementById('suggestions');
-    div.innerHTML = '<div class="category-header" style="border-left:4px solid #8E44AD;"><i class="ph ph-sparkle"></i> Michelin Chef Suggestions</div>';
+    div.innerHTML = '<div class="category-header" style="border-left:4px solid #8E44AD;"><i class="ph ph-heart"></i> Nourishing Suppers</div>';
 
     document.getElementById('suggestions').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -250,8 +251,8 @@ export function renderSuggestions() {
 
         const tipHtml = chefTip ? `
             <div class="chefs-tip">
-                <i class="ph ph-magic-wand" style="margin-right:6px; font-size:1.1rem; vertical-align:middle;"></i> 
-                <b>Chef's Tip:</b> ${chefTip}
+                <i class="ph ph-heart" style="margin-right:6px; font-size:1.1rem; vertical-align:middle; color:var(--text-accent);"></i> 
+                <b>Nourish Note:</b> ${chefTip}
             </div>` : '';
 
         const metaHtml = `
@@ -316,7 +317,7 @@ export function renderLibrary(data) {
                     <button class="btn-icon danger" onclick="window.deleteRecipe(event, ${r.id})" title="Delete Recipe"><i class="ph ph-trash" style="font-size: 1.2rem;"></i></button>
                 </div>
                 <div id="${id}" class="recipe-content">
-                    ${tip ? `<div class="chefs-tip"><i class="ph ph-magic-wand"></i> <b>Chef's Tip:</b> ${tip}</div>` : ''}
+                    ${tip ? `<div class="chefs-tip"><i class="ph ph-heart" style="margin-right:6px; font-size:1.1rem; vertical-align:middle; color:var(--text-accent);"></i> <b>Nourish Note:</b> ${tip}</div>` : ''}
                     <p style="margin-top:12px; font-weight:600;">Ingredients:</p>
                     <ul>${ings.map(ing => `<li>${ing}</li>`).join('')}</ul>
                     <p style="margin-top:12px; font-weight:600;">Instructions:</p>
@@ -502,7 +503,8 @@ window.flyToCategory = function(safeId) {
     setTimeout(() => {
         const target = document.getElementById(`cat-header-${safeId}`);
         if (target) {
-            const y = target.getBoundingClientRect().top + window.scrollY - 130;
+            const offset = window.innerWidth <= 640 ? 86 : 112;
+            const y = target.getBoundingClientRect().top + window.scrollY - offset;
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
     }, 50);

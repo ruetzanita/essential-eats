@@ -334,7 +334,7 @@ export async function commitGrocery() {
 
 export async function getSuggestions() {
     const div = document.getElementById('suggestions');
-    div.innerHTML = "<p style='padding:25px; color:var(--text-accent); text-align:center;'><i class='ph ph-spinner ph-spin' style='font-size:1.5rem; vertical-align:middle; margin-right:8px;'></i> Formulating Michelin Chef recipes with Gemini 3.8 Flash...</p>";
+    div.innerHTML = "<p style='padding:25px; color:var(--text-accent); text-align:center;'><i class='ph ph-spinner ph-spin' style='font-size:1.5rem; vertical-align:middle; margin-right:8px;'></i> Formulating nourishing supper ideas from your pantry with Gemini 3.8 Flash...</p>";
     div.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     try {
@@ -366,7 +366,7 @@ export async function getSuggestions() {
         const rawData = await res.json();
         state.suggestionsStore = normalize(rawData, 'recipe');
         renderSuggestions();
-        showToast("Generated 5 bespoke Michelin Chef recipes!", "success");
+        showToast("Formulated 5 nourishing supper ideas!", "success");
     } catch (e) {
         div.innerHTML = `<p style='padding:20px; color:var(--danger); text-align:center;'>Suggestions unavailable: ${e.message}</p>`;
         showToast(`Failed to generate recipes: ${e.message}`, "danger");

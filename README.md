@@ -53,16 +53,10 @@ graph TD
 - **Brand Stripping:** Automatically removes noisy manufacturer names (e.g. `"Lays Kettle Chips"` $\rightarrow$ `"Kettle Chips"`).
 - **Pantry Context Matching:** Compares incoming items against the user's existing inventory to align categories (e.g. keeps broccoli under `Frozen Foods` if already stocked there).
 
-### 2. Michelin Chef Constraint Solver (`/api/suggest`)
+### 2. Nourishing Supper Constraint Solver (`/api/suggest`)
 - **Protein & Fresh Anchors:** Selects up to 5 protein/fresh anchors (`Fresh`, `Frozen Foods`, `Meat`) to build complete meals around.
-- **Zero-Tolerance Dietary Guardrails:** Deterministically enforces 5 mandatory baseline restrictions on every prompt:
-  - **Gluten-Free** (no wheat, barley, rye, breading, standard soy sauce)
-  - **Dairy-Free** (no butter, milk, cheese, cream, yogurt)
-  - **Chocolate-Free** (no cocoa, cacao, chocolate)
-  - **Sage-Free** (no fresh or dried sage herb)
-  - **Nut-Free** (no peanuts or tree nuts)
-  - *Combined with any user-selected UI toggles* (Vegetarian, Vegan, Keto).
-- **Culinary Chef's Tips:** Every recipe includes execution steps, cooking temperatures, seasoning profiles, and a bespoke `chefTip` (seasonal swaps, deglazing methods, searing techniques).
+- **Zero-Tolerance Dietary Guardrails:** Deterministically enforces strict dietary guardrails on every prompt (Gluten-Free, Dairy-Free, Nut-Free, Vegetarian, Vegan, Keto).
+- **Culinary Nourish Notes:** Every recipe balances practical pantry reality with mindful nourishment—including execution steps, cooking temperatures, seasoning profiles, and a concise 2–3 sentence `chefTip` (Nourish Note) highlighting a special flavor touch and a versatile swap for next time.
 
 ### 3. Dedicated "OUT OF STOCK" Auto-Sorting
 - Items with `quantity <= 0` are segregated into an `OUT OF STOCK` section at the bottom of the pantry list.
@@ -83,7 +77,7 @@ graph TD
 - **Empathy-Driven Storytelling:** Welcomes tired users with an empathetic narrative addressing evening dinner fatigue and the dread of rummaging through cluttered cupboards, reassuring them that edge AI is here to solve supper without pantry chaos.
 - **Visual Design System:** Features a luminous sunset gradient title (`#FFFFFF` to `#FFA785` to `#FF6B6B`), glowing pulse animations, balanced typography (`text-wrap: balance`), and smooth glassmorphic backdrops.
 - **Interactive Feature Pillars:** Instant highlights for Gemini 3.8 Flash recipe formulation, multimodal receipt vision, and deterministic allergen guardrails.
-- **Frictionless Entry Points:** 1-tap **"Step Into the Kitchen"** entry, plus a direct **"See 'What's For Supper?'"** shortcut that dismisses the splash and triggers the Michelin chef solver immediately.
+- **Frictionless Entry Points:** 1-tap **"Step Into the Kitchen"** entry, plus a direct **"See 'What's For Supper?'"** shortcut that dismisses the splash and triggers the nourishing supper solver immediately.
 - **Direct Creator Contact:** Integrated contact capsule linking directly to [hello@ruetzanita.com](mailto:hello@ruetzanita.com).
 - **Persistent Header Access:** A permanent [`STORY`](#) button in the header bar allows re-summoning the modal anytime with `sessionStorage` persistence.
 

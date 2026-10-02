@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <p class="story-tail">
-                    Whether you scan a messy grocery receipt or let our Michelin Chef constraint solver invent dinner
+                    Whether you scan a messy grocery receipt or let our nourishing supper solver invent dinner
                     with zero allergens, dinner is finally off your mental to-do list.
                 </p>
                 <div class="story-contact-note-wrapper">
@@ -114,87 +114,89 @@
         </div>
     </div>
 
-    <header>
-        <div style="display:flex; flex-direction:column;">
-            <h1>Essential Eats</h1>
-            <span class="v-tag">Build: 2026.10.01-B • Sandbox Demo</span>
-        </div>
-        <div class="header-actions">
-            <button class="btn btn-outline btn-story" onclick="openSplashIntro()" title="Intro & Demo Story">
-                <i class="ph ph-sparkle"></i> STORY
-            </button>
-            <div class="theme-picker-container">
-                <button id="btn-theme-picker" class="btn btn-outline btn-theme" onclick="toggleThemePicker(event)" title="Choose Sensory Color Theme" aria-label="Color Themes">
-                    <i class="ph ph-palette"></i> THEME
+    <div class="app-header-sticky">
+        <header>
+            <div style="display:flex; flex-direction:column;">
+                <h1>Essential Eats</h1>
+                <span class="v-tag">Build: 2026.10.01-B • Sandbox Demo</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-outline btn-story" onclick="openSplashIntro()" title="Intro & Demo Story">
+                    <i class="ph ph-sparkle"></i> STORY
                 </button>
-                <div id="theme-picker-dropdown" class="theme-picker-dropdown" style="display: none;" role="dialog" aria-label="Theme selector">
-                    <div class="theme-picker-header">
-                        <span class="theme-picker-title"><i class="ph ph-palette"></i> Sensory Color Themes</span>
-                        <span class="theme-picker-sub">Select a palette that feels calm for you</span>
-                    </div>
-                    <div class="theme-options-list">
-                        <!-- 1. Midnight Neon -->
-                        <button class="theme-option-btn" onclick="setTheme('midnight')" data-theme-id="midnight">
-                            <div class="theme-swatch" style="background: linear-gradient(135deg, #0D0E12 50%, #FF6B6B 50%); border: 1px solid rgba(255,107,107,0.4);"></div>
-                            <div class="theme-info">
-                                <span class="theme-name">Midnight Neon <span class="theme-badge-default">Default</span></span>
-                                <span class="theme-desc">Deep dark slate with sunset coral</span>
-                            </div>
-                            <i class="ph ph-check-bold theme-check"></i>
-                        </button>
+                <div class="theme-picker-container">
+                    <button id="btn-theme-picker" class="btn btn-outline btn-theme" onclick="toggleThemePicker(event)" title="Choose Sensory Color Theme" aria-label="Color Themes">
+                        <i class="ph ph-palette"></i> THEME
+                    </button>
+                    <div id="theme-picker-dropdown" class="theme-picker-dropdown" style="display: none;" role="dialog" aria-label="Theme selector">
+                        <div class="theme-picker-header">
+                            <span class="theme-picker-title"><i class="ph ph-palette"></i> Sensory Color Themes</span>
+                            <span class="theme-picker-sub">Select a palette that feels calm for you</span>
+                        </div>
+                        <div class="theme-options-list">
+                            <!-- 1. Midnight Neon -->
+                            <button class="theme-option-btn" onclick="setTheme('midnight')" data-theme-id="midnight">
+                                <div class="theme-swatch" style="background: linear-gradient(135deg, #0D0E12 50%, #FF6B6B 50%); border: 1px solid rgba(255,107,107,0.4);"></div>
+                                <div class="theme-info">
+                                    <span class="theme-name">Midnight Neon <span class="theme-badge-default">Default</span></span>
+                                    <span class="theme-desc">Deep dark slate with sunset coral</span>
+                                </div>
+                                <i class="ph ph-check-bold theme-check"></i>
+                            </button>
 
-                        <!-- 2. Warm Earth & Sage -->
-                        <button class="theme-option-btn" onclick="setTheme('sage')" data-theme-id="sage">
-                            <div class="theme-swatch" style="background: linear-gradient(135deg, #191C18 50%, #7EA172 50%); border: 1px solid rgba(126,161,114,0.5);"></div>
-                            <div class="theme-info">
-                                <span class="theme-name">Warm Earth & Sage</span>
-                                <span class="theme-desc">Low stimulation, soft olive & calming sage</span>
-                            </div>
-                            <i class="ph ph-check-bold theme-check"></i>
-                        </button>
+                            <!-- 2. Warm Earth & Sage -->
+                            <button class="theme-option-btn" onclick="setTheme('sage')" data-theme-id="sage">
+                                <div class="theme-swatch" style="background: linear-gradient(135deg, #191C18 50%, #7EA172 50%); border: 1px solid rgba(126,161,114,0.5);"></div>
+                                <div class="theme-info">
+                                    <span class="theme-name">Warm Earth & Sage</span>
+                                    <span class="theme-desc">Low stimulation, soft olive & calming sage</span>
+                                </div>
+                                <i class="ph ph-check-bold theme-check"></i>
+                            </button>
 
-                        <!-- 3. Lavender Dusk -->
-                        <button class="theme-option-btn" onclick="setTheme('dusk')" data-theme-id="dusk">
-                            <div class="theme-swatch" style="background: linear-gradient(135deg, #12131D 50%, #9E86E8 50%); border: 1px solid rgba(158,134,232,0.5);"></div>
-                            <div class="theme-info">
-                                <span class="theme-name">Lavender Dusk</span>
-                                <span class="theme-desc">Restful evening twilight & gentle lilac</span>
-                            </div>
-                            <i class="ph ph-check-bold theme-check"></i>
-                        </button>
+                            <!-- 3. Lavender Dusk -->
+                            <button class="theme-option-btn" onclick="setTheme('dusk')" data-theme-id="dusk">
+                                <div class="theme-swatch" style="background: linear-gradient(135deg, #12131D 50%, #9E86E8 50%); border: 1px solid rgba(158,134,232,0.5);"></div>
+                                <div class="theme-info">
+                                    <span class="theme-name">Lavender Dusk</span>
+                                    <span class="theme-desc">Restful evening twilight & gentle lilac</span>
+                                </div>
+                                <i class="ph ph-check-bold theme-check"></i>
+                            </button>
 
-                        <!-- 4. Linen & Matcha -->
-                        <button class="theme-option-btn" onclick="setTheme('linen')" data-theme-id="linen">
-                            <div class="theme-swatch" style="background: linear-gradient(135deg, #F2F4F0 50%, #3E7E52 50%); border: 1px solid rgba(62,126,82,0.4);"></div>
-                            <div class="theme-info">
-                                <span class="theme-name">Linen & Matcha</span>
-                                <span class="theme-desc">Airy morning light, soft linen & fresh matcha</span>
-                            </div>
-                            <i class="ph ph-check-bold theme-check"></i>
-                        </button>
+                            <!-- 4. Linen & Matcha -->
+                            <button class="theme-option-btn" onclick="setTheme('linen')" data-theme-id="linen">
+                                <div class="theme-swatch" style="background: linear-gradient(135deg, #F2F4F0 50%, #3E7E52 50%); border: 1px solid rgba(62,126,82,0.4);"></div>
+                                <div class="theme-info">
+                                    <span class="theme-name">Linen & Matcha</span>
+                                    <span class="theme-desc">Airy morning light, soft linen & fresh matcha</span>
+                                </div>
+                                <i class="ph ph-check-bold theme-check"></i>
+                            </button>
 
-                        <!-- 5. Paper & Oat -->
-                        <button class="theme-option-btn" onclick="setTheme('oat')" data-theme-id="oat">
-                            <div class="theme-swatch" style="background: linear-gradient(135deg, #F5F4EE 50%, #C75932 50%); border: 1px solid rgba(199,89,50,0.5);"></div>
-                            <div class="theme-info">
-                                <span class="theme-name">Paper & Oat</span>
-                                <span class="theme-desc">Gentle warm light mode, easy on daylight eyes</span>
-                            </div>
-                            <i class="ph ph-check-bold theme-check"></i>
-                        </button>
+                            <!-- 5. Paper & Oat -->
+                            <button class="theme-option-btn" onclick="setTheme('oat')" data-theme-id="oat">
+                                <div class="theme-swatch" style="background: linear-gradient(135deg, #F5F4EE 50%, #C75932 50%); border: 1px solid rgba(199,89,50,0.5);"></div>
+                                <div class="theme-info">
+                                    <span class="theme-name">Paper & Oat</span>
+                                    <span class="theme-desc">Gentle warm light mode, easy on daylight eyes</span>
+                                </div>
+                                <i class="ph ph-check-bold theme-check"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
+                <button class="btn btn-outline" onclick="toggleGrocery()"><i class="ph ph-receipt"></i> + GROCERY</button>
             </div>
-            <button class="btn btn-outline" onclick="toggleGrocery()"><i class="ph ph-receipt"></i> + GROCERY</button>
-        </div>
-    </header>
+        </header>
 
-    <nav>
-        <button id="tab-inv" class="active-tab" onclick="switchView('inv')"><i class="ph ph-package"></i>
-            INVENTORY</button>
-        <button id="tab-shop" onclick="switchView('shop')"><i class="ph ph-shopping-cart"></i> SHOPPING</button>
-        <button id="tab-lib" onclick="switchView('lib')"><i class="ph ph-book-open-text"></i> LIBRARY</button>
-    </nav>
+        <nav>
+            <button id="tab-inv" class="active-tab" onclick="switchView('inv')"><i class="ph ph-package"></i>
+                INVENTORY</button>
+            <button id="tab-shop" onclick="switchView('shop')"><i class="ph ph-shopping-cart"></i> SHOPPING</button>
+            <button id="tab-lib" onclick="switchView('lib')"><i class="ph ph-book-open-text"></i> LIBRARY</button>
+        </nav>
+    </div>
 
     <!-- Grocery Receipt Ingestion Portal -->
     <div id="grocery-portal">
