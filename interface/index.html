@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Essential Eats • Smart Kitchen Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <!-- Splash Intro Modal / Screen -->
+    <div id="splash-intro-overlay" class="splash-intro-overlay" onclick="handleSplashBackdropClick(event)">
+        <div class="splash-ambient-glow glow-1"></div>
+        <div class="splash-ambient-glow glow-2"></div>
+        <div class="splash-ambient-glow glow-3"></div>
+
+        <div class="splash-card" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+            <button class="splash-close-btn" onclick="dismissSplashIntro()" title="Close and explore demo"
+                aria-label="Close intro">
+                <i class="ph ph-x"></i>
+            </button>
+
+            <div class="splash-header-group">
+                <div class="splash-badge">
+                    <i class="ph ph-sparkle"></i>
+                    <span>Smart Kitchen Sandbox Demo</span>
+                </div>
+                <h1 id="splash-title" class="splash-title">Essential Eats</h1>
+                <p class="splash-tagline">Dinner without the dread • Powered by Gemini 3.8 Flash</p>
+            </div>
+
+            <div class="splash-story-section">
+                <p class="story-lead">
+                    We know how it feels. It’s the end of a long, grueling day, your energy is running on empty, and the
+                    very thought of answering <em>"What’s for supper?"</em> feels overwhelming.
+                </p>
+                <p class="story-body">
+                    You don't have to stand in the kitchen exhausted, rummaging through shadowy cupboards, digging past
+                    forgotten cans, and wondering what on earth you can pull together tonight.
+                </p>
+                <div class="story-hero-callout">
+                    <div class="callout-glow-badge">
+                        <i class="ph-fill ph-heart"></i>
+                    </div>
+                    <div class="callout-text">
+                        <h3>Don't worry — Essential Eats is here to save the day.</h3>
+                        <p>Take a breath and step back from the pantry. Our edge AI turns whatever is already sitting on
+                            your shelves into comforting, chef-inspired meals in seconds.</p>
+                    </div>
+                </div>
+                <p class="story-tail">
+                    Whether you scan a messy grocery receipt or let our Michelin Chef constraint solver invent dinner
+                    with zero allergens, dinner is finally off your mental to-do list.
+                </p>
+                <div class="story-contact-note-wrapper">
+                    <div class="story-contact-note">
+                        <i class="ph ph-envelope-simple"></i>
+                        <span>Have thoughts, feedback, or want to connect? Drop me a note at <a href="mailto:hello@ruetzanita.com" class="story-email-link">hello@ruetzanita.com</a>.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="splash-highlights">
+                <div class="splash-highlight-card">
+                    <div class="highlight-icon" style="color: #FF6B6B; background: rgba(255, 107, 107, 0.12);">
+                        <i class="ph ph-magic-wand"></i>
+                    </div>
+                    <div class="highlight-info">
+                        <strong>"What's for Supper?" AI</strong>
+                        <span>Formulates creative, zero-waste recipes using only items you actually have in
+                            stock.</span>
+                    </div>
+                </div>
+                <div class="splash-highlight-card">
+                    <div class="highlight-icon" style="color: #22C55E; background: rgba(34, 197, 94, 0.12);">
+                        <i class="ph ph-camera"></i>
+                    </div>
+                    <div class="highlight-info">
+                        <strong>Smart Receipt Vision</strong>
+                        <span>Snap or paste receipts to instantly parse items, unpack bulk packs, and restock.</span>
+                    </div>
+                </div>
+                <div class="splash-highlight-card">
+                    <div class="highlight-icon" style="color: #A855F7; background: rgba(168, 85, 247, 0.12);">
+                        <i class="ph ph-shield-check"></i>
+                    </div>
+                    <div class="highlight-info">
+                        <strong>Dietary Chef Guardrails</strong>
+                        <span>Deterministic Gluten-Free, Dairy-Free, and Nut-Free safety enforced on every dish.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="splash-actions">
+                <button class="btn btn-splash-main" onclick="dismissSplashIntro()">
+                    <span>Step Into the Kitchen</span>
+                    <i class="ph ph-arrow-right"></i>
+                </button>
+                <button class="btn btn-splash-supper" onclick="dismissSplashIntroAndSupper()">
+                    <i class="ph ph-cooking-pot"></i>
+                    <span>See "What's For Supper?"</span>
+                </button>
+            </div>
+
+            <div class="splash-footer-hint">
+                <i class="ph ph-info"></i>
+                <span>You can reopen this intro anytime with the <b>STORY</b> button in the top bar.</span>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div style="display:flex; flex-direction:column;">
+            <h1>Essential Eats</h1>
+            <span class="v-tag">Build: 2026.10.01-B • Sandbox Demo</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-outline btn-story" onclick="openSplashIntro()" title="Intro & Demo Story">
+                <i class="ph ph-sparkle"></i> STORY
+            </button>
+            <button class="btn btn-outline" onclick="toggleGrocery()"><i class="ph ph-receipt"></i> + GROCERY</button>
+        </div>
+    </header>
+
+    <nav>
+        <button id="tab-inv" class="active-tab" onclick="switchView('inv')"><i class="ph ph-package"></i>
+            INVENTORY</button>
+        <button id="tab-shop" onclick="switchView('shop')"><i class="ph ph-shopping-cart"></i> SHOPPING</button>
+        <button id="tab-lib" onclick="switchView('lib')"><i class="ph ph-book-open-text"></i> LIBRARY</button>
+    </nav>
+
+    <!-- Grocery Receipt Ingestion Portal -->
+    <div id="grocery-portal">
+        <input type="file" id="receipt-file-input" accept="image/*" capture="environment" style="display:none;"
+            onchange="handleReceiptImageUpload(event)">
+
+        <button class="btn btn-outline"
+            style="width:100%; margin-bottom:12px; background:rgba(255,255,255,0.04); border-color:var(--accent);"
+            onclick="document.getElementById('receipt-file-input').click()">
+            <i class="ph ph-camera" style="font-size:1.2rem; color:var(--accent);"></i> SCAN RECEIPT PHOTO / UPLOAD
+        </button>
+
+        <div
+            style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin-bottom:10px; text-transform:uppercase; letter-spacing:1px;">
+            — or paste receipt text —
+        </div>
+
+        <textarea id="raw-input"
+            placeholder="Paste digital receipt, checkout summary, or grocery list here... you can even just type it out if you really want!"></textarea>
+        <button class="btn" style="width:100%; background:var(--accent-grad); margin: 10px 0; color:#000;"
+            onclick="parseGrocery()"><i class="ph ph-sparkle"></i> PROCESS WITH GEMINI 3.8 FLASH</button>
+
+        <div id="staging-area"></div>
+        <button id="commit-btn" class="btn"
+            style="display:none; width:100%; background:var(--success); color:#000; margin-top:15px;"
+            onclick="commitGrocery()"><i class="ph ph-check-circle"></i> COMMIT TO INVENTORY</button>
+    </div>
+
+    <!-- Inventory View -->
+    <div id="view-inv" class="view active-view">
+        <div id="dietary-toggles" class="dietary-bar">
+            <span style="font-weight: 600; opacity: 0.85; font-size: 0.85rem;"><i class="ph ph-shield-check"></i> Chef
+                Guardrails:</span>
+            <label title="Gluten-Free"><input type="checkbox" id="toggle-gf"> GF</label>
+            <label title="Dairy-Free"><input type="checkbox" id="toggle-df"> DF</label>
+            <label title="Nut-Free"><input type="checkbox" id="toggle-nf"> Nut-Free</label>
+            <label title="Vegetarian"><input type="checkbox" id="toggle-v"> Veg</label>
+            <label title="Vegan"><input type="checkbox" id="toggle-vegan"> Vegan</label>
+            <label title="Low-Carb / Keto"><input type="checkbox" id="toggle-keto"> Keto</label>
+        </div>
+        <div id="suggestions"></div>
+        <div id="inventory-list"></div>
+    </div>
+
+    <!-- Shopping List View -->
+    <div id="view-shop" class="view">
+        <div style="padding: 15px; display: flex; gap: 10px;">
+            <input type="text" id="shop-input" placeholder="Add custom grocery item..." style="flex:1;">
+            <button class="btn btn-qty" style="background:var(--accent-grad); border:none; color:#000;"
+                onclick="addShopItem()" title="Add Item"><i class="ph ph-plus"></i></button>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 0 15px 5px 15px;">
+            <div class="category-header" style="padding:0; margin:0; border:none;">To Buy</div>
+            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 0.8rem;"
+                onclick="exportShoppingList()">
+                <i class="ph ph-share-network"></i> EXPORT / SHARE
+            </button>
+        </div>
+        <div id="shopping-list"></div>
+    </div>
+
+    <!-- Library View -->
+    <div id="view-lib" class="view">
+        <div style="padding: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn btn-outline" style="flex: 1; min-width: 150px;"
+                onclick="document.getElementById('url-import-portal').style.display='block'; document.getElementById('import-portal').style.display='none';">
+                <i class="ph ph-link"></i> CLIP RECIPE FROM URL
+            </button>
+            <button class="btn btn-outline" style="flex: 1; min-width: 150px;"
+                onclick="document.getElementById('import-portal').style.display='block'; document.getElementById('url-import-portal').style.display='none';">
+                <i class="ph ph-download-simple"></i> PASTE TEXT
+            </button>
+        </div>
+
+        <!-- URL Import & Mobile Clipper Portal -->
+        <div id="url-import-portal"
+            style="display:none; background:var(--card); padding:16px; border-bottom: 1px solid var(--border); border-radius: 12px; margin: 0 15px 15px 15px; backdrop-filter: blur(16px);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <b style="font-size:0.95rem; color:var(--text-accent);"><i class="ph ph-magic-wand"></i> Ad-Free Recipe Web Clipper</b>
+                <button class="btn-icon" onclick="document.getElementById('url-import-portal').style.display='none'" title="Close"><i class="ph ph-x"></i></button>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px; line-height:1.4;">
+                Paste any recipe link from the web. Essential Eats will strip the ads, intros, and trackers, extracting the clean ingredients & steps.
+            </p>
+            <div style="display:flex; gap:8px; margin-bottom:10px;">
+                <input type="url" id="recipe-url-input" placeholder="https://allrecipes.com/recipe/..." style="flex:1;">
+            </div>
+            <button id="btn-parse-url" class="btn" style="width:100%; background:var(--accent-grad); color:#000; font-weight:600;"
+                onclick="importRecipeFromUrl()"><i class="ph ph-download-simple"></i> FETCH & SAVE (NO ADS)</button>
+            
+            <div style="margin-top:12px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:8px; font-size:0.75rem; color:var(--text-muted); line-height:1.4;">
+                <b style="color:var(--text-main);"><i class="ph ph-device-mobile"></i> Mobile Browser Tip:</b> Bookmark this link on your phone: <a href="javascript:(function(){window.open('https://essentialeats.ruetzanita.com/?clip='+encodeURIComponent(location.href));})();" onclick="event.preventDefault(); navigator.clipboard.writeText(this.href); showToast('Mobile bookmarklet copied to clipboard!', 'info');" style="color:var(--text-accent); text-decoration:underline; font-weight:600;">Clip to Essential Eats</a> (tap to copy bookmarklet).
+            </div>
+        </div>
+
+        <!-- Raw Text Import Portal -->
+        <div id="import-portal"
+            style="display:none; background:var(--card); padding:16px; border-bottom: 1px solid var(--border); border-radius: 12px; margin: 0 15px 15px 15px; backdrop-filter: blur(16px);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <b style="font-size:0.95rem; color:var(--text-accent);"><i class="ph ph-file-text"></i> Paste Recipe Text</b>
+                <button class="btn-icon" onclick="document.getElementById('import-portal').style.display='none'" title="Close"><i class="ph ph-x"></i></button>
+            </div>
+            <textarea id="recipe-import-input" style="height:140px;"
+                placeholder="Paste raw unstructured recipe text from blogs, emails, or notes..."></textarea>
+            <button class="btn" style="width:100%; margin-top:10px; background:var(--accent-grad); color:#000; font-weight:600;"
+                onclick="importRecipes()"><i class="ph ph-file-arrow-down"></i> PARSE & SAVE RECIPES</button>
+        </div>
+
+        <div class="category-header">Saved Favorites</div>
+        <div id="recipe-library"></div>
+    </div>
+
+    <!-- Floating Bottom Dock -->
+    <div class="bottom-dock">
+        <div id="quick-nav" class="quick-nav"></div>
+        <div style="display:flex; gap:10px; align-items:center;">
+            <div id="dock-out-badge" class="dock-warning-badge" style="display:none;" onclick="scrollToOutOfStock()"
+                title="Jump to Out of Stock">
+                <i class="ph ph-warning-circle"></i> <span id="out-count-num">0</span> OUT
+            </div>
+            <button id="supper-btn" onclick="getSuggestions()" style="flex:1;">
+                <i class="ph ph-magic-wand"></i> WHAT'S FOR SUPPER?
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="/src/main.js"></script>
+
+    <button id="back-to-top" onclick="scrollToTop()" title="Back to Top">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+</body>
+
+</html>

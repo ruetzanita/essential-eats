@@ -1,0 +1,48 @@
+# Logs & Runtime
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build Outputs
+dist/
+build/
+out/
+.output/
+
+# Cloudflare Wrangler & Miniflare State
+.wrangler/
+.mf/
+
+# Secrets & Environment Variables (CRITICAL)
+API Key
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor Files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Test & Coverage Artifacts
+coverage/
+.nyc_output/
+*.lcov
