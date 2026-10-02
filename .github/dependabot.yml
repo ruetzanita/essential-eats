@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Backend Cloudflare Worker API
+  - package-ecosystem: "npm"
+    directory: "/logic"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # @cloudflare/vitest-pool-workers strictly requires Vitest 3.x; ignore Vitest 4+ and 5+ major updates
+      - dependency-name: "vitest"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vitest/*"
+        update-types: ["version-update:semver-major"]
+
+  # Frontend Vite Interface
+  - package-ecosystem: "npm"
+    directory: "/interface"
+    schedule:
+      interval: "weekly"
